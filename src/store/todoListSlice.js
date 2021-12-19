@@ -18,9 +18,17 @@ export const todoListSlice = createSlice({
       state.list.push(action.payload);
       return state;
     },
+    deleteTodo: (state, action) => {
+      const todoDelete = action.payload;
+      let todos = state.list;
+      todos.splice(
+        todos.findIndex((todo) => todo.id === todoDelete),
+        1
+      );
+    },
   },
 });
 
-export const { setTodos, addTodos } = todoListSlice.actions;
+export const { setTodos, addTodos, deleteTodo } = todoListSlice.actions;
 
 export default todoListSlice.reducer;

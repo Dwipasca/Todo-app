@@ -15,7 +15,14 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 
+import { useDispatch } from "react-redux";
+
+// redux reducer
+import { deleteTodo } from "../../store/todoListSlice";
+
 const DetailTodo = ({ isOpen, onClose, todo }) => {
+  const dispatch = useDispatch();
+
   const [editTodo, setEditTodo] = useState({
     title: "",
     description: "",
@@ -41,6 +48,10 @@ const DetailTodo = ({ isOpen, onClose, todo }) => {
       ...editTodo,
       status: e.target.value,
     });
+  };
+
+  const handleDeleteTodo = () => {
+    dispatch(deleteTodo(todo.id));
   };
 
   console.log(editTodo);
@@ -89,7 +100,11 @@ const DetailTodo = ({ isOpen, onClose, todo }) => {
           <Button mr={3} colorScheme="orange">
             Edit
           </Button>
-          <Button colorScheme="red" disabled={todo.status === 0 ? true : false}>
+          <Button
+            colorScheme="red"
+            disabled={todo.status === 0 ? true : false}
+            onClick={handleDeleteTodo}
+          >
             Delete Todo
           </Button>
         </ModalFooter>
