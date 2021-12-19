@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import {
   Modal,
   ModalOverlay,
@@ -13,16 +12,18 @@ import {
   FormLabel,
   Input,
   Textarea,
+  Select,
+  useToast,
+  Flex,
 } from "@chakra-ui/react";
-
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // redux reducer
 import { deleteTodo, changeTodo } from "../../store/todoListSlice";
 
 const DetailTodo = ({ isOpen, onClose, todo }) => {
-  // const todoList = useSelector((state) => state.todoList.list);
   const dispatch = useDispatch();
+  const toast = useToast();
 
   const [editTodo, setEditTodo] = useState(todo);
 
@@ -43,21 +44,35 @@ const DetailTodo = ({ isOpen, onClose, todo }) => {
   const handleStatusEdit = (e) => {
     setEditTodo({
       ...editTodo,
-      status: e.target.value,
+      status: parseInt(e.target.value),
     });
   };
 
   const handleDeleteTodo = () => {
     dispatch(deleteTodo(todo.id));
     onClose();
+    toast({
+      position: "top-right",
+      title: "Delete Todo",
+      description: "Todo has been successfully delete.",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
   };
 
   const handleEditTodo = () => {
     dispatch(changeTodo(editTodo));
     onClose();
+    toast({
+      position: "top-right",
+      title: "Edit Todo",
+      description: "Edit todo successfully.",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
   };
-
-  console.log(editTodo);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -66,37 +81,41 @@ const DetailTodo = ({ isOpen, onClose, todo }) => {
         <ModalHeader>Detail Todo</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <FormControl>
-            <FormLabel htmlFor="id-todo">ID</FormLabel>
-            <Input id="id-todo" type="text" value={editTodo.id} isDisabled />
-          </FormControl>
-          <FormControl>
-            <FormLabel htmlFor="title-todo">Title</FormLabel>
-            <Input
-              id="title-todo"
-              type="text"
-              value={editTodo.title}
-              onChange={(e) => handleTitleEdit(e)}
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel htmlFor="desc-todo">Description</FormLabel>
-            <Textarea
-              id="desc-todo"
-              type="text"
-              value={editTodo.description}
-              onChange={(e) => handleDescEdit(e)}
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel htmlFor="status-todo">Status</FormLabel>
-            <Input
-              id="status-todo"
-              type="number"
-              value={editTodo.status}
-              onChange={(e) => handleStatusEdit(e)}
-            />
-          </FormControl>
+          <Flex flexDir="column" gap={5}>
+            <FormControl>
+              <FormLabel htmlFor="id-todo">ID</FormLabel>
+              <Input id="id-todo" type="text" value={editTodo.id} isDisabled />
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="title-todo">Title</FormLabel>
+              <Input
+                id="title-todo"
+                type="text"
+                value={editTodo.title}
+                onChange={(e) => handleTitleEdit(e)}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="desc-todo">Description</FormLabel>
+              <Textarea
+                id="desc-todo"
+                type="text"
+                value={editTodo.description}
+                onChange={(e) => handleDescEdit(e)}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="status-todo">Status</FormLabel>
+              <Select
+                id="status-todo"
+                value={editTodo.status}
+                onChange={(e) => handleStatusEdit(e)}
+              >
+                <option value="0">0</option>
+                <option value="1">1</option>
+              </Select>
+            </FormControl>
+          </Flex>
         </ModalBody>
 
         <ModalFooter>

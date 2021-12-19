@@ -13,11 +13,12 @@ export const todoListSlice = createSlice({
       state.list = action.payload;
       return state;
     },
-    //Adding todos
+
     addTodos: (state, action) => {
       state.list.push(action.payload);
       return state;
     },
+
     deleteTodo: (state, action) => {
       const todoDelete = action.payload;
       let todos = state.list;
@@ -26,6 +27,7 @@ export const todoListSlice = createSlice({
         1
       );
     },
+
     changeTodo: (state, action) => {
       const { id, title, description, status } = action.payload;
       let todos = state.list;

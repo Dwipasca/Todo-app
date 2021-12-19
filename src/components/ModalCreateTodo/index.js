@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-
 import {
   Modal,
   ModalOverlay,
@@ -16,6 +14,7 @@ import {
   Textarea,
   useToast,
 } from "@chakra-ui/react";
+import { useSelector, useDispatch } from "react-redux";
 
 // redux reducer
 import { addTodos } from "../../store/todoListSlice";
@@ -72,8 +71,6 @@ const CreateTodo = ({ isOpen, onClose }) => {
       isClosable: true,
     });
   };
-
-  console.log(todo);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>

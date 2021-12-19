@@ -1,6 +1,6 @@
-// lib
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Flex, Box, Button, Heading, useDisclosure } from "@chakra-ui/react";
 import axios from "axios";
 
 // redux reducer
@@ -9,8 +9,6 @@ import { setTodos } from "../../store/todoListSlice";
 // component
 import Todo from "../../components/Todo";
 import ModalCreateTodo from "../../components/ModalCreateTodo";
-
-import { Flex, Box, Button, Heading, useDisclosure } from "@chakra-ui/react";
 
 const TodoList = () => {
   const todos = useSelector((state) => state.todoList.list);
@@ -25,8 +23,6 @@ const TodoList = () => {
     axios.get(url).then((res) => dispatch(setTodos(res.data)));
   }, [dispatch]);
 
-  console.log(todos, todos.length);
-
   return (
     <Flex
       direction="column"
@@ -34,6 +30,7 @@ const TodoList = () => {
       align="center"
       w="100vw"
       h="100vh"
+      gap={10}
     >
       <Box>
         <Heading as="h1" size="lg" isTruncated>
