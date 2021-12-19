@@ -14,6 +14,7 @@ import {
   FormLabel,
   Input,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 
 // redux reducer
@@ -23,6 +24,7 @@ const CreateTodo = ({ isOpen, onClose }) => {
   const todos = useSelector((state) => state.todoList.list);
 
   const dispatch = useDispatch();
+  const toast = useToast();
 
   const [todo, setTodo] = useState({
     title: "",
@@ -55,6 +57,20 @@ const CreateTodo = ({ isOpen, onClose }) => {
         createdAt: "2021-12-19 15:00",
       })
     );
+    setTodo({
+      title: "",
+      description: "",
+    });
+
+    onClose();
+    toast({
+      position: "top-right",
+      title: "Create Todo",
+      description: "New todo successfully created.",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
   };
 
   console.log(todo);
