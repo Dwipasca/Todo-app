@@ -15,19 +15,16 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 // redux reducer
-import { deleteTodo } from "../../store/todoListSlice";
+import { deleteTodo, changeTodo } from "../../store/todoListSlice";
 
 const DetailTodo = ({ isOpen, onClose, todo }) => {
+  // const todoList = useSelector((state) => state.todoList.list);
   const dispatch = useDispatch();
 
-  const [editTodo, setEditTodo] = useState({
-    title: "",
-    description: "",
-    status: todo.status,
-  });
+  const [editTodo, setEditTodo] = useState(todo);
 
   const handleTitleEdit = (e) => {
     setEditTodo({
@@ -52,6 +49,12 @@ const DetailTodo = ({ isOpen, onClose, todo }) => {
 
   const handleDeleteTodo = () => {
     dispatch(deleteTodo(todo.id));
+    onClose();
+  };
+
+  const handleEditTodo = () => {
+    dispatch(changeTodo(editTodo));
+    onClose();
   };
 
   console.log(editTodo);
@@ -65,14 +68,14 @@ const DetailTodo = ({ isOpen, onClose, todo }) => {
         <ModalBody>
           <FormControl>
             <FormLabel htmlFor="id-todo">ID</FormLabel>
-            <Input id="id-todo" type="text" value={todo.id} isDisabled />
+            <Input id="id-todo" type="text" value={editTodo.id} isDisabled />
           </FormControl>
           <FormControl>
             <FormLabel htmlFor="title-todo">Title</FormLabel>
             <Input
               id="title-todo"
               type="text"
-              value={todo.title}
+              value={editTodo.title}
               onChange={(e) => handleTitleEdit(e)}
             />
           </FormControl>
@@ -81,7 +84,7 @@ const DetailTodo = ({ isOpen, onClose, todo }) => {
             <Textarea
               id="desc-todo"
               type="text"
-              value={todo.description}
+              value={editTodo.description}
               onChange={(e) => handleDescEdit(e)}
             />
           </FormControl>
@@ -90,14 +93,14 @@ const DetailTodo = ({ isOpen, onClose, todo }) => {
             <Input
               id="status-todo"
               type="number"
-              value={todo.status}
+              value={editTodo.status}
               onChange={(e) => handleStatusEdit(e)}
             />
           </FormControl>
         </ModalBody>
 
         <ModalFooter>
-          <Button mr={3} colorScheme="orange">
+          <Button mr={3} colorScheme="orange" onClick={handleEditTodo}>
             Edit
           </Button>
           <Button

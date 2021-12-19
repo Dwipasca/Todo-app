@@ -26,9 +26,19 @@ export const todoListSlice = createSlice({
         1
       );
     },
+    changeTodo: (state, action) => {
+      const { id, title, description, status } = action.payload;
+      let todos = state.list;
+      const idx = todos.findIndex((obj) => obj.id === id);
+      todos[idx].title = title;
+      todos[idx].description = description;
+      todos[idx].status = status;
+      console.log(todos);
+    },
   },
 });
 
-export const { setTodos, addTodos, deleteTodo } = todoListSlice.actions;
+export const { setTodos, addTodos, deleteTodo, changeTodo } =
+  todoListSlice.actions;
 
 export default todoListSlice.reducer;

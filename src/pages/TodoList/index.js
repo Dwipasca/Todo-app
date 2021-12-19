@@ -12,8 +12,6 @@ import ModalCreateTodo from "../../components/ModalCreateTodo";
 
 import { Flex, Box, Button, Heading, useDisclosure } from "@chakra-ui/react";
 
-// import style from "./todoList.module.css";
-
 const TodoList = () => {
   const todos = useSelector((state) => state.todoList.list);
   const dispatch = useDispatch();
