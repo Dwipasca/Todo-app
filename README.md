@@ -12,13 +12,21 @@
 
 - React JS
 - React Redux
+- Chakra UI
+- Axios
 
 ## How to run project
 
 - clone project with script below
 
 ```
-   git clone [TBD]
+   git clone https://github.com/Dwipasca/Todo-app.git
+```
+
+- go to project directory
+
+```
+    cd todo-app
 ```
 
 - install lib for the project
