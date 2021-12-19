@@ -1,12 +1,19 @@
 import React from "react";
+import { useDisclosure } from "@chakra-ui/react";
 
-// style
-// import style from "./todo.module.css";
+import ModalDetailTodo from "../ModalDetailTodo";
 
 const Todo = ({ todo }) => {
+  // const { isDetailOpen, onDetailOpen, onDetailClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <div>
-      <p>{todo.title}</p>
+      <button onClick={onOpen}>{todo.title}</button>
+
+      {isOpen && (
+        <ModalDetailTodo isOpen={isOpen} onClose={onClose} todo={todo} />
+      )}
     </div>
   );
 };

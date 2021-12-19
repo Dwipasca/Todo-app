@@ -10,7 +10,6 @@ import { setTodos } from "../../store/todoListSlice";
 import Todo from "../../components/Todo";
 import ModalCreateTodo from "../../components/ModalCreateTodo";
 
-// style
 import { Flex, Box, Button, Heading, useDisclosure } from "@chakra-ui/react";
 
 // import style from "./todoList.module.css";
