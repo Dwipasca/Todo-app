@@ -1,5 +1,5 @@
 import React from "react";
-import { useDisclosure, Button, Box } from "@chakra-ui/react";
+import { useDisclosure, Button } from "@chakra-ui/react";
 
 // component
 import ModalDetailTodo from "../ModalDetailTodo";
@@ -10,19 +10,15 @@ const Todo = ({ todo }) => {
   return (
     <div>
       {todo.status === 0 && (
-        <Box bg="red">
-          <Button onClick={onOpen} isFullWidth>
-            {todo.title}
-          </Button>
-        </Box>
+        <Button onClick={onOpen} isFullWidth colorScheme="red">
+          {todo.title}
+        </Button>
       )}
 
       {todo.status === 1 && (
-        <Box bg="green">
-          <Button onClick={onOpen} isFullWidth>
-            {todo.title}
-          </Button>
-        </Box>
+        <Button onClick={onOpen} isFullWidth colorScheme="green">
+          {todo.title}
+        </Button>
       )}
 
       {isOpen && (

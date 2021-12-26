@@ -25,7 +25,9 @@ const DetailTodo = ({ isOpen, onClose, todo }) => {
   const dispatch = useDispatch();
   const toast = useToast();
 
-  const [editTodo, setEditTodo] = useState(todo);
+  const [editTodo, setEditTodo] = useState({
+    id: todo.id,
+  });
 
   const handleTitleEdit = (e) => {
     setEditTodo({
@@ -63,6 +65,7 @@ const DetailTodo = ({ isOpen, onClose, todo }) => {
 
   const handleEditTodo = () => {
     dispatch(changeTodo(editTodo));
+
     onClose();
     toast({
       position: "top-right",
@@ -91,7 +94,7 @@ const DetailTodo = ({ isOpen, onClose, todo }) => {
               <Input
                 id="title-todo"
                 type="text"
-                value={editTodo.title}
+                defaultValue={todo.title}
                 onChange={(e) => handleTitleEdit(e)}
               />
             </FormControl>
@@ -100,7 +103,7 @@ const DetailTodo = ({ isOpen, onClose, todo }) => {
               <Textarea
                 id="desc-todo"
                 type="text"
-                value={editTodo.description}
+                defaultValue={todo.description}
                 onChange={(e) => handleDescEdit(e)}
               />
             </FormControl>
@@ -108,7 +111,7 @@ const DetailTodo = ({ isOpen, onClose, todo }) => {
               <FormLabel htmlFor="status-todo">Status</FormLabel>
               <Select
                 id="status-todo"
-                value={editTodo.status}
+                defaultValue={todo.status}
                 onChange={(e) => handleStatusEdit(e)}
               >
                 <option value="0">0</option>

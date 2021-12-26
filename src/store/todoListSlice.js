@@ -29,13 +29,17 @@ export const todoListSlice = createSlice({
     },
 
     changeTodo: (state, action) => {
-      const { id, title, description, status } = action.payload;
+      const id = action.payload.id;
+      // const { id, title, description, status } = action.payload;
       let todos = state.list;
       const idx = todos.findIndex((obj) => obj.id === id);
-      todos[idx].title = title;
-      todos[idx].description = description;
-      todos[idx].status = status;
-      console.log(todos);
+
+      let keys = Object.keys(action.payload);
+      let values = Object.values(action.payload);
+
+      for (let i = 0; i <= keys.length - 1; i++) {
+        todos[idx][keys[i]] = values[i];
+      }
     },
   },
 });

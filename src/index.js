@@ -9,10 +9,17 @@ import store from "./store";
 
 // chakra ui
 // 1. import `ChakraProvider` component
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+
+const config = {
+  initialColorMode: "light",
+  useSystemColorMode: true,
+};
+
+const theme = extendTheme({ config });
 
 ReactDOM.render(
-  <ChakraProvider>
+  <ChakraProvider theme={theme}>
     <Provider store={store}>
       <App />
     </Provider>

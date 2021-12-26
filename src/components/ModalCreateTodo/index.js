@@ -25,10 +25,7 @@ const CreateTodo = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
   const toast = useToast();
 
-  const [todo, setTodo] = useState({
-    title: "",
-    description: "",
-  });
+  const [todo, setTodo] = useState({});
 
   const isEmpty = todo.title === "" || todo.description === "";
 
