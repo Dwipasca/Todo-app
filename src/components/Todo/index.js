@@ -8,23 +8,15 @@ const Todo = ({ todo }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <div>
-      {todo.status === 0 && (
-        <Button onClick={onOpen} isFullWidth colorScheme="red">
-          {todo.title}
-        </Button>
-      )}
-
-      {todo.status === 1 && (
-        <Button onClick={onOpen} isFullWidth colorScheme="green">
-          {todo.title}
-        </Button>
-      )}
+    <>
+      <Button onClick={onOpen} isFullWidth mb="10px">
+        {todo.title}
+      </Button>
 
       {isOpen && (
         <ModalDetailTodo isOpen={isOpen} onClose={onClose} todo={todo} />
       )}
-    </div>
+    </>
   );
 };
 

@@ -5,7 +5,7 @@
 - User can see List Todo
 - User can create new todo
 - User can edit todo item
-- User can delete todo item if status todo item not 1
+- User can delete todo item if status todo item is 1
 - User can click the Todo item to show detail todo and actions like edit or delete todo
 
 ## Tech and Lib I use

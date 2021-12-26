@@ -44,11 +44,36 @@ const TodoList = () => {
         </Button>
       </Box>
 
-      <Box>
-        {todos.map((todo) => (
-          <Todo key={todo.id} todo={todo} />
-        ))}
-      </Box>
+      <Flex flexDir="row" gap={20} justifyContent="center">
+        <Flex
+          border="2px solid black"
+          width="30%"
+          wrap="wrap"
+          justifyContent="center"
+          padding="10px"
+        >
+          <Heading as="h2" size="md" mb={5}>
+            Uncomplete Task
+          </Heading>
+          {todos.map((todo) =>
+            todo.status === 0 ? <Todo key={todo.id} todo={todo} /> : null
+          )}
+        </Flex>
+        <Flex
+          border="2px solid black"
+          width="30%"
+          wrap="wrap"
+          justifyContent="center"
+          padding="10px"
+        >
+          <Heading as="h2" size="md" mb={5}>
+            Complete Task
+          </Heading>
+          {todos.map((todo) =>
+            todo.status === 1 ? <Todo key={todo.id} todo={todo} /> : null
+          )}
+        </Flex>
+      </Flex>
 
       {isOpen && <ModalCreateTodo isOpen={isOpen} onClose={onClose} />}
     </Flex>
